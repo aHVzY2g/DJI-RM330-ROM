@@ -1,0 +1,38 @@
+{
+    "proc_list": [
+               {"level":0,"type": 0,"name": "com.android.inputmethod.latin"},
+               {"level":0,"type": 0,"name": "com.google.android.inputmethod.latin"},
+               {"level":0,"type": 0,"name": "com.android.permissioncontroller"},
+               {"level":0,"type": 0,"name": "com.android.packageinstaller"},
+               {"level":0,"type": 0,"name": "android.process.media"},
+               {"level":0,"type": 0,"name": "com.dpad.devicetest"},
+               {"level":0,"type": 0,"name": "android.ext.services"},
+               {"level":0,"type": 0,"name": "android.process.acore"},
+               {"level":0,"type": 0,"name": "com.android.settings"},
+               {"level":0,"type": 0,"name": "com.dpad.fuli"},
+               {"level":0,"type": 1,"name": "qdutils_disp-1-0"},
+               {"level":0,"type": 1,"name": "gatekeeperd"},
+               {"level":0,"type": 1,"name": "gatekeeper-1-0"},
+               {"level":0,"type": 1,"name": "dji_amt"},
+               {"level":0,"type": 1,"name": "idmap2d"},
+               {"level":0,"type": 1,"name": "perf-hal-2-1"},
+               {"level":0,"type": 1,"name": "vendor.ipacm"},
+               {"level":0,"type": 1,"name": "vendor.perfservice"},
+               {"level":0,"type": 1,"name": "incidentd"},
+               {"level":0,"type": 1,"name": "tui_comm-1-0"},
+               {"level":0,"type": 1,"name": "vendor.capabilityconfigstore"},
+               {"level":0,"type": 1,"name": "vendor.cas-hal-1-1"},
+               {"level":0,"type": 1,"name": "vendor.ipacm-diag"},
+               {"level":0,"type": 1,"name": "vendor.atrace-hal-1-0"},
+               {"level":0,"type": 1,"name": "wifidisplayhalservice"},
+               {"level":0,"type": 1,"name": "ssgqmigd"},
+               {"level":0,"type": 1,"name": "mdnsd"},
+               {"level":0,"type": 1,"name": "mlid"},
+               {"level":0,"type": 1,"name": "logd"},
+               {"level":0,"type": 1,"name": "abc"},
+               {"level":0,"type": 1,"name": "vendor.qrtr-ns"},
+			   
+               {"level":1,"type": 0,"name": "com.android.inputmethod.latin"},
+               {"level":1,"type": 0,"name": "com.google.android.inputmethod.latin"}
+    ]
+}

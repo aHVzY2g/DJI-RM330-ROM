@@ -1,0 +1,11 @@
+service dji_config_store /system/bin/dji_config_store
+    disabled
+    class core
+    user root
+    group root
+
+on property:dji.configstore=1
+    start dji_config_store
+
+on property:dji.configstore=0
+    stop dji_config_store

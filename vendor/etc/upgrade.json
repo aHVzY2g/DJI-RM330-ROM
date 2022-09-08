@@ -1,0 +1,341 @@
+{
+    "upgrade_service_layer_cfg": {
+        "product_lib_name": "libupgrade_product.so",
+        "need_set_upcenter_unsigned_package_name": {
+            "state": "enable",
+            "params": {
+                "upcenter_unsigned_package_name": "/data/media/0/upgrade_center/qcom/upgrade_package/dji_system.bin"
+            }
+        },
+        "enable_fc_led_ctrl": {
+            "state": "disable",
+            "params": "null"
+        },
+        "enable_storage_upgrading": {
+            "state": "disable",
+            "params": "null"
+        },
+        "register_cold_reboot_function": {
+            "state": "disable",
+            "params": "null"
+        },
+        "register_check_module_allow_skip_func": {
+            "state": "disable",
+            "params": "null"
+        },
+        "enable_motor_ctrl": {
+            "state": "disable",
+            "params": "null"
+        },
+        "enable_power_ctrl": {
+            "state": "enable",
+            "params": {
+                "safe_bat_ratio":"15"
+            }
+        },
+        "register_upcenter_version_getting": {
+            "state": "enable",
+            "params": {
+                "version_provider": "0x0205"
+            }
+        },
+        "enable_print_upcenter_version": {
+            "state": "enable",
+            "params": "null"
+        },
+        "enable_upgrade_status_change_action": {
+            "state": "enable",
+            "params": {
+                "action_index_str": "USC_ACT_OPS_RC430"
+            }
+        },
+        "enable_check_upgrade_prerequisite": {
+            "state": "disable",
+            "params": "null"
+        },
+        "enable_ftp_switch_before_trans": {
+            "state": "enable",
+            "params": {
+                "enable_peer": "0x0205"
+            }
+        },
+        "enable_set_upgrading_log_level": {
+            "state": "enable",
+            "params": {
+                "upgrading_log_level": "info"
+            }
+        },
+        "enable_check_upgrade_disk_remain_size": {
+            "state": "enable",
+            "params": {
+                "limit_mini_size": "1340"
+            }
+        },
+        "enable_export_external_version": {
+            "state": "enable",
+            "params": {
+                "export_attribute": "0x01"
+            }
+        },
+        "communication": {
+            "capability": {
+                "V1": {
+                    "ID": "0x0d00",
+                    "domain_name": "qcom_upgrade_service",
+                    "role_name": "qcom_upgrade"
+                },
+                "V2": {
+                    "ID": "null",
+                    "machine_id": "null"
+                },
+                "IP": {
+                    "ip_addr": "null",
+                    "port": "null"
+                }
+            }
+        },
+        "transfer": {
+            "capability": {
+                "V1_LOW": {
+                    "ID": "0x0d00"
+                },
+                "V1_LOST_LIST": {
+                    "ID": "0x0d00"
+                }
+            }
+        }
+    },
+
+    "upgrade_core_layer_cfg": {
+        "no_need_register": "null",
+        "device register": {
+            "register id": {
+                "method": "null",
+                "dst": "null",
+                "dst_name": "null"
+            },
+            "interface": "null",
+            "no_need_check": "true",
+            "register_list": [
+                {"register_item":{
+                    "dst_name":"fly_app",
+                    "method":"V1",
+                    "ID":"0x0200"
+                }},
+                {"register_item":{
+                    "dst_name":"fuli_app",
+                    "method":"V1",
+                    "ID":"0x0204"
+                }},
+                {"register_item":{
+                    "dst_name":"pc",
+                    "method":"V1",
+                    "ID":"0x0a01"
+                }},
+                {"register_item":{
+                    "dst_name":"server",
+                    "method":"null"
+                }}
+            ]
+        },
+        "remote register": {
+            "register_list": [
+                {"register_item":{
+                    "dst_name":"fly_app",
+                    "method":"V1",
+                    "ID":"0x0200"
+                }},
+                {"register_item":{
+                    "dst_name":"fuli_app",
+                    "method":"V1",
+                    "ID":"0x0204"
+                }},
+                {"register_item":{
+                    "dst_name":"pc",
+                    "method":"V1",
+                    "ID":"0x0a01"
+                }},
+                {"register_item":{
+                    "dst_name":"server",
+                    "method":"null"
+                }}
+            ]
+        },
+        "upgrade_info_cfg": {
+            "platform": "LINUX",
+            "LINUX_cfg": {
+                "base_dir": "/mnt/dji_persist/upgrade_center/qcom/info_mngr/"
+            },
+            "RTOS_cfg": {
+                "start_addr": "null",
+                "end_addr": "null"
+            }
+        },
+        "upgrade": {
+            "upgrade center": {
+                "device name": "rm330",
+                "device type": "normal",
+                "upgrade id": "0x0d00",
+                "upgrade_sec_type": "2",
+                "internal_up_package_name": "ota.zip",
+                "upcenter_unsign_name": "/data/update.zip",
+                "upgrade_package_base_path": "/data/media/0/upgrade_center/qcom/upgrade_package/",
+                "upgrade_logs_saving_path": "/data/media/0/dji_logs/upgrade_logs/qcom/",
+                "unsigned_package_saving_base_path": "/data/media/0/upgrade_center/qcom/unsigned_package/",
+                "coldreboot_when_success": "false",
+                "place_data_saved_to": "FILE",
+                "upgrade_cfg_saving_path": "/mnt/dji_persist/upgrade_center/qcom/cfg/",
+                "retry_times_normal": "1",
+                "retry_times_accident": "3",
+                "status_push_mode": "PUSH_MODE_TIMER",
+                "status_push_msg_mode": "PUSH_MSG_MODE_SUMMARY",
+                "status_push_timer_period_us": 1000000,
+                "upgrade_both_ab_partition": "false",
+                "whitelist_upgrade_enable": "0",
+                "compatible_upgrade": {
+                    "state": "disable",
+                    "request_peer_name": [
+                        "app_a",
+                        "app_b",
+                        "pc"
+                    ]
+                },
+                "upgrade_error_handle": {
+                    "state": "enable",
+                    "no_space_error": {
+                        "state": "disable"
+                    }
+                }
+            },
+            "agency": {
+                "forwarder id": "0x0d01",
+                "agency_device": [
+                    {
+                        "device": {
+                            "name": "GD620",
+                            "ID": "0x0b00",
+                            "type": "normal"
+                        }
+                    }
+                ]
+            }
+        },
+
+        "module_detail_list":[
+            {"module": {"name": "sys_app",
+                        "upgrade_package_name_mapping_str": "0205",
+                        "order": "1",
+                        "is_upgrade_center_self": "true",
+                        "op_lib_name": "librecovery_md_up.so",
+                        "communication": {  "method": "V1",
+                                            "ID": "0x0205"
+                                        },
+                        "type": "normal",
+                        "only_check_ver": "false",
+                        "loader_needed": "false",
+                        "post_reset": "false",
+                        "post_check_ver": "true",
+                        "reboot_after_fail": "true",
+                        "reboot_notify": "true",
+                        "resp_get_ver": "true",
+                        "support_multi_hw": "false",
+                        "allow_skip": "false",
+                        "force_upgrade": "true",
+                        "delay_after_1_pkg_us": "0",
+                        "delay_after_a_cmd_s": "0",
+                        "fail_repeat": "2",
+                        "sound_file": "null",
+                        "time_config":{ "get_version":          {"timeout_s":"null", "delay_after_cmd_s":"null"},
+                                        "request_upgrade":      {"timeout_s":"null", "delay_after_cmd_s":"null"},
+                                        "check_status":         {"timeout_s":"null", "delay_after_cmd_s":"null"},
+                                        "request_accept_data":  {"timeout_s":"null", "delay_after_cmd_s":"null"},
+                                        "transfer_data":        {"timeout_s":"null", "delay_after_cmd_s":"null"},
+                                        "transfer_complete":    {"timeout_s":"null", "delay_after_cmd_s":"null"},
+                                        "reboot":               {"timeout_s":"null", "delay_after_cmd_s":"null"},
+                                        "wait_status_report_time":"null",
+                                        "wait_status_report_time_total":"null"
+                                        }
+                        }
+            },
+
+            {"module": {"name": "SPARROW_GND",
+                        "upgrade_package_name_mapping_str": "1400",
+                        "order": "2",
+                        "op_lib_name": "libsparrow_noemmc_md_up.so",
+                        "communication": {  "method": "V1",
+                                            "ID": "0x0e00"
+                                        },
+                        "type": "normal",
+                        "only_check_ver": "false",
+                        "loader_needed": "false",
+                        "post_reset": "false",
+                        "post_check_ver": "false",
+                        "reboot_after_fail": "false",
+                        "resp_get_ver": "true",
+                        "support_multi_hw": "false",
+                        "allow_skip": "false",
+                        "force_upgrade": "true",
+                        "delay_after_1_pkg_us": "0",
+                        "delay_after_a_cmd_s": "0",
+                        "fail_repeat": "2",
+                        "sound_file": "null",
+                        "time_config":{ "get_version":          {"timeout_s":"null", "delay_after_cmd_s":"null"},
+                                        "request_upgrade":      {"timeout_s":"null", "delay_after_cmd_s":"null"},
+                                        "check_status":         {"timeout_s":"null", "delay_after_cmd_s":"null"},
+                                        "request_accept_data":  {"timeout_s":"null", "delay_after_cmd_s":"null"},
+                                        "transfer_data":        {"timeout_s":"null", "delay_after_cmd_s":"null"},
+                                        "transfer_complete":    {"timeout_s":"null", "delay_after_cmd_s":"null"},
+                                        "reboot":               {"timeout_s":"null", "delay_after_cmd_s":"null"},
+                                        "wait_status_report_time":"null",
+                                        "wait_status_report_time_total":"null"
+                                        }
+                        }
+            },
+
+            {"module": {"name": "RC_MCU",
+                        "upgrade_package_name_mapping_str": "0600",
+                        "order": "3",
+                        "communication": {  "method": "V1",
+                                            "ID": "0x0600"
+                                        },
+                        "type": "normal",
+                        "only_check_ver": "false",
+                        "loader_needed": "true",
+                        "post_reset": "true",
+                        "post_check_ver": "true",
+                        "reboot_after_fail": "true",
+                        "resp_get_ver": "true",
+                        "support_multi_hw": "false",
+                        "allow_skip": "false",
+                        "force_upgrade": "true",
+                        "delay_after_1_pkg_us": "0",
+                        "delay_after_a_cmd_s": "0",
+                        "fail_repeat": "2",
+                        "sound_file": "null",
+                        "time_config":{ "get_version":          {"timeout_s":"null", "delay_after_cmd_s":"null"},
+                                        "request_upgrade":      {"timeout_s":"null", "delay_after_cmd_s":"null"},
+                                        "check_status":         {"timeout_s":"null", "delay_after_cmd_s":"null"},
+                                        "request_accept_data":  {"timeout_s":"null", "delay_after_cmd_s":"null"},
+                                        "transfer_data":        {"timeout_s":"null", "delay_after_cmd_s":"null"},
+                                        "transfer_complete":    {"timeout_s":"null", "delay_after_cmd_s":"null"},
+                                        "reboot":               {"timeout_s":"null", "delay_after_cmd_s":"null"},
+                                        "wait_status_report_time":"null",
+                                        "wait_status_report_time_total":"null"
+                                        }
+                        }
+            }
+        ]
+    },
+
+    "module_upgrade_lib_cfg": {
+    },
+    "module_mngr": {
+        "sub_device_parallel_up" : "parallel all",
+        "sub_device_fail_abort" : "false",
+        "item_upgrade_weight": {
+            "sys_app": {"TOTAL": 500, "PREPARE": 5, "TRANSFER": 5, "REAL_UPGRADE": 80},
+            "SPARROW_GND": {"TOTAL": 100, "PREPARE": 5, "TRANSFER": 10, "REAL_UPGRADE": 75},
+            "RC_MCU": {"TOTAL": 60, "PREPARE": 0, "TRANSFER": 80, "REAL_UPGRADE": 0}
+        }
+    }
+}

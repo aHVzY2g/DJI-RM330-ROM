@@ -1,0 +1,6 @@
+service upgrade_test /system/bin/start_upgrade_test.sh -e dji.upgrade_test_param
+    disabled
+    oneshot
+    class core
+    user root
+    group root

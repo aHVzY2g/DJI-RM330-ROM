@@ -1,0 +1,201 @@
+{
+    "basic": {
+        "version":               0,
+        "dev_type":              "RC",
+        "dev_role":              "master_RC",
+        "lte_enable":            1,
+        "sdr_enable":            1,
+        "wifi_enable":           0,
+        "sdr_agent_host_id":     "0x0e00",
+        "wifi_agent_host_id":    "0x0000",
+        "wifi_interact_host_id": "0x0000",
+        "lte_agent_host_id":     "0x0e06",
+        "local_router_host_id":  "0x0205",
+        "peer_wlm_host_id":      "0x0907",
+        "wifi_hw_controller":    "0x0000",
+        "osd_receiver_host_id":  "0x0200",
+        "osd_sync_freq":         5,
+        "add_test_helper":       0,
+        "ls_auto_enable":        0
+    },
+    "master_internal_com": {
+        "share_info_sync_freq":  10,
+        "delay_start_time_ms":   4800
+    },
+    "device_manager": {
+        "dev_state_update_freq": 10,
+        "register_interval_ms":  600
+    },
+    "msg_dispatch": {
+        "multipack_ver":            "logic",
+        "multipack_sdr_enable":     0,
+        "multipack_lte_enable":     0,
+        "multipack_wifi_enable":    0,
+        "multipack_max_count":      30,
+        "multipack_max_timeout_ms": 100,
+        "white_list": []
+    },
+    "link_mode": {
+        "max_rectify_cnt":     5,
+        "rectify_interval_ms": 800,
+        "link_mode_policy":    "flexible",
+        "default_link_mode": {
+            "command":         "SDR_ONLY",
+            "liveview":        "SDR_ONLY",
+            "common_data":     "SDR_ONLY"
+        }
+    },
+    "min_bw_bps": {
+        "common_command": 50000,
+        "rt_command":     50000,
+        "liveview":       300000,
+        "common_data":    300000
+    },
+    "rc_hosts": ["0x0200", "0x0205", "0x0207", "0x0600", "0x0d00", "0x0d01", "0x0e00", "0x0e07","0x0e06"],
+    "glass_hosts": ["0x1c00", "0x1c01", "0x1c07", "0x1d00"],
+    "route_switch": {
+		"1": {"scene": "SDR_ONLY",
+              "steps": ["0x0205", "0x0e06"]},
+		"2": {"scene": "LTE_ONLY",
+              "steps": ["0x0e06", "0x0205"]},
+		"3": {"scene": "HYBRID_LTE_SDR",
+              "steps": ["0x0e06", "0x0205"]}
+
+    },
+
+    "share_info": {
+        "enable":         1,
+        "channel":        "shm",
+        "shm_file":       "/dev/wlm_shm",
+        "shm_size_bytes": 1024,
+        "shm_key":        123
+    },
+    "internal_com": {
+        "enable":      0,
+        "host_id":     0,
+        "listen_port": 0,
+        "targets": {
+		}
+    },
+    "wl_manager_library": {
+        "common": {
+            "debug": false,
+            "hybrid_type_lte_sdr": true,
+            "hybrid_type_sdr_wifi": false,
+            "hybrid_type_lte_wifi": false
+        },
+        "modules": {
+                "0x0205": {
+                    "module_name": "dji_link",
+                    "channels":[
+                        {"type":"bulk_single","dev":"usb-bulk-host", "reconnect":false,"host": true, "vid":"2CA3", "pid":"1020", "interface": 0, "ep_in": "81", "ep_out":"01"},
+                        {"type": "udp", "server": true, "local_port": 4000},
+                        {"type": "fifo", "path":"/data/fifo_lte", "read": true}
+                    ],
+                    "datas": {
+                                "data0": {
+                                        "wl_data_type": "liveview1",
+                                        "link_number": 2,
+                                        "recv_mode": "controlled",
+                                        "send_mode": "controlled",
+                                        "link_sdr": {
+                                                "enable": true,
+                                                "input": 0
+                                                },
+                                        "link_lte": {
+                                                "enable": true,
+                                                "input": 2
+                                                },
+                                        "params":{
+                                            "mode_lte_only": {
+                                                "recv_source": "wlm_share",
+                                                "send_target": "wlm_share"
+                                            },
+                                            "mode_sdr_only": {
+                                                "recv_source": "wlm_share",
+                                                "send_target": "wlm_share"
+                                            },
+                                            "mode_wifi_only": {
+                                                "recv_source": "wlm_share",
+                                                "send_target": "wlm_share"
+                                            },
+                                            "mode_lift_only": {
+                                                "recv_source": "wlm_share",
+                                                "send_target": "wlm_share"
+                                            }
+                                        }
+                                }
+                        }
+
+                },
+                "0x0e06": {
+                    "module_name": "dji_lte",
+                    "channels":[
+                        {"type": "udp", "server": false, "target_ip": "127.0.0.1", "target_port": 4000},
+                        {"type": "fifo", "path":"/data/fifo_lte", "read": false},
+                        {"type":"bulk_single","dev":"usb-bulk-ctrl", "reconnect":false,"host": true, "vid":"2CA3", "pid":"1020", "interface": 6, "ep_in": "87", "ep_out":"05"}
+                    ],
+                    "datas": {
+                                "data0": {
+                                        "wl_data_type": "liveview1",
+                                        "link_number": 1,
+                                        "recv_mode": "link_lte",
+                                        "send_mode": "link_lte",
+                                        "link_lte": {
+                                                "enable": true,
+                                                "output": 1
+                                                },
+                                        "params":{
+                                            "mode_lte_only": {
+                                                "recv_source": "wlm_share",
+                                                "send_target": "wlm_share"
+                                            },
+                                            "mode_sdr_only": {
+                                                "recv_source": "wlm_share",
+                                                "send_target": "wlm_share"
+                                            },
+                                            "mode_wifi_only": {
+                                                "recv_source": "wlm_share",
+                                                "send_target": "wlm_share"
+                                            },
+                                            "mode_lift_only": {
+                                                "recv_source": "wlm_share",
+                                                "send_target": "wlm_share"
+                                            }
+                                        }
+                                }, 
+                                "data1": {
+                                        "wl_data_type": "selfdefine1",
+                                        "link_number": 1,
+                                        "recv_mode": "link_selfdefine",
+                                        "send_mode": "link_selfdefine",
+					"rm_libwlm_header": false,
+					"check_libwlm_header": false,
+                                        "link_selfdefine": {
+                                                "enable": true,
+                                                "input": 2
+                                                },
+                                        "params":{
+                                            "mode_lte_only": {
+                                                "recv_source": "wlm_share",
+                                                "send_target": "wlm_share"
+                                            },
+                                            "mode_sdr_only": {
+                                                "recv_source": "wlm_share",
+                                                "send_target": "wlm_share"
+                                            },
+                                            "mode_wifi_only": {
+                                                "recv_source": "wlm_share",
+                                                "send_target": "wlm_share"
+                                            },
+                                            "mode_lift_only": {
+                                                "recv_source": "wlm_share",
+                                                "send_target": "wlm_share"
+                                            }
+                                        }
+                                }
+                    }
+                }       
+        }
+    }
+}

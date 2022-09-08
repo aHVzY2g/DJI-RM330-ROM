@@ -1,0 +1,11 @@
+service dji_upgrade /system/bin/dji_upgrade -j /system/etc/upgrade.json -l DUSS63
+    disabled
+    class core
+    user root
+    group root
+
+on property:dji.upgrade_service=1
+    start dji_upgrade
+
+on property:dji.upgrade_service=0
+    stop dji_upgrade

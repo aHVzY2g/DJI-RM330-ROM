@@ -1,0 +1,9 @@
+service gnss_service  /vendor/bin/hw/android.hardware.gnss@2.0-service-unicore
+    class hal
+    user root
+    group root
+    seclabel u:r:hal_gnss_unicore:s0
+    disabled
+
+on property:ro.sys.gps.moudle.flag=unicore
+    start gnss_service

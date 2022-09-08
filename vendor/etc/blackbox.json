@@ -1,0 +1,71 @@
+{
+    "common":{
+        "soc": "qcom",
+        "addr": "U-QCOM",
+        "role": 1,
+        "product_info": {
+            "product" :    "RM330",
+            "drone_type" : 0,
+            "soc_bb_addr": [
+                    {"addr":"U-QCOM",  "host_type":29, "host_index":3}
+            ]
+        }
+    },
+    "core":[
+        {
+            "module": "log_channel",
+            "configuration": {}
+        },
+        {
+            "module": "data_center",
+            "configuration": {
+                "task_interval_ms": 1000,
+                "data_list": [
+                    {"name": "boot_data", "update_interval": 0, "specific": {"sync_by_self": 1, "property_name": "persist.sys.boot_index"}}
+                ]
+            }
+        },
+        {
+            "module": "bt_collector",
+            "configuration": {
+                "task_interval_ms": 2000,
+                "max_list_size": 10,
+                "rtc_sync_prop": "prop.dji.sync_rtc_done"
+            }
+        },
+        {
+            "module": "log_collector",
+            "configuration": {
+                "polling": [
+                    {"path": "/blackbox/dji_logs/logs",         "module": "android",    "check_rm": 1 },
+                    {"path": "/blackbox/sdrs_log/da_log",       "module": "sdr",    "check_rm": 1 },
+                    {"path": "/blackbox/sdrs_log/serial_log",   "module": "sdr",    "check_rm": 1 },
+                    {"path": "/blackbox/sdrs_log/dump_log",     "module": "sdr",    "check_rm": 1 },
+                    {"path": "/blackbox/mcu",                   "module": "mcu",    "check_rm": 1 },
+                    {"path": "/blackbox/lte",                   "module": "lte",    "check_rm": 1 }
+                ],
+                "necessity": [
+                    {"path": "/blackbox/info",                             "module": "info"},
+                    {"path": "/blackbox/dji_logs/anr",              	   "module": "anr"},
+                    {"path": "/blackbox/dji_logs/recovery",              "module": "recovery"},
+                    {"path": "/blackbox/dji_logs/tombstones",              "module": "tombstones"},
+                    {"path": "/blackbox/dji_logs/upgrade_logs",            "module": "upgrade"},
+                    {"path": "/sdcard/Android/data/dji.go.v5/files/LOG",                 "module": "fly"},
+                    {"path": "/sdcard/Android/data/dji.go.v5/files/FlightRecord","module": "flight_rec"}
+                ]
+            }
+        }
+    ],
+    "application": [
+        {
+            "module": "log_exporter",
+            "configuration": {
+                "special_exp_path": [
+                   {"path": "/sdcard/Android/data"}
+                 ]
+            }
+        }
+    ],
+    "utility": [
+    ]
+}

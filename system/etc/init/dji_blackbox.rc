@@ -1,0 +1,23 @@
+service dji_blackbox /system/bin/dji_blackbox
+    disabled
+    class core
+    user root
+    group root
+
+on property:dji.blackbox_service=1
+    start dji_blackbox
+
+on property:dji.blackbox_service=0
+    stop dji_blackbox
+
+service dji_blackbox_v2 /system/bin/dji_blackbox -v 2
+    disabled
+    class core
+    user root
+    group root
+
+on property:dji.blackbox_service_v2=1
+    start dji_blackbox_v2
+
+on property:dji.blackbox_service_v2=0
+    stop dji_blackbox_v2

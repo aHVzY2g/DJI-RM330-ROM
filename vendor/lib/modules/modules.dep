@@ -1,0 +1,22 @@
+/vendor/lib/modules/audio_adsp_loader.ko: /vendor/lib/modules/audio_apr.ko /vendor/lib/modules/audio_q6_notifier.ko
+/vendor/lib/modules/pronto_wlan.ko:
+/vendor/lib/modules/audio_stub.ko:
+/vendor/lib/modules/audio_wcd9xxx.ko: /vendor/lib/modules/audio_wcd_core.ko /vendor/lib/modules/audio_q6.ko /vendor/lib/modules/audio_apr.ko /vendor/lib/modules/audio_q6_notifier.ko
+/vendor/lib/modules/audio_q6_notifier.ko:
+/vendor/lib/modules/audio_wcd_core.ko:
+/vendor/lib/modules/audio_cpe_lsm.ko: /vendor/lib/modules/audio_wcd_cpe.ko /vendor/lib/modules/audio_wcd_core.ko /vendor/lib/modules/audio_q6.ko /vendor/lib/modules/audio_apr.ko /vendor/lib/modules/audio_q6_notifier.ko
+/vendor/lib/modules/audio_wcd_cpe.ko: /vendor/lib/modules/audio_wcd_core.ko /vendor/lib/modules/audio_q6.ko /vendor/lib/modules/audio_apr.ko /vendor/lib/modules/audio_q6_notifier.ko
+/vendor/lib/modules/audio_wcd9335.ko: /vendor/lib/modules/audio_swr_ctrl.ko /vendor/lib/modules/audio_swr.ko /vendor/lib/modules/audio_mbhc.ko /vendor/lib/modules/audio_wcd9xxx.ko /vendor/lib/modules/audio_wcd_cpe.ko /vendor/lib/modules/audio_wcd_core.ko /vendor/lib/modules/audio_q6.ko /vendor/lib/modules/audio_apr.ko /vendor/lib/modules/audio_q6_notifier.ko
+/vendor/lib/modules/audio_swr_ctrl.ko: /vendor/lib/modules/audio_swr.ko
+/vendor/lib/modules/audio_machine_sdm450.ko: /vendor/lib/modules/audio_digital_cdc.ko /vendor/lib/modules/audio_analog_cdc.ko /vendor/lib/modules/audio_mbhc.ko /vendor/lib/modules/audio_wcd9xxx.ko /vendor/lib/modules/audio_wcd_core.ko /vendor/lib/modules/audio_q6.ko /vendor/lib/modules/audio_apr.ko /vendor/lib/modules/audio_q6_notifier.ko
+/vendor/lib/modules/audio_usf.ko: /vendor/lib/modules/audio_q6.ko /vendor/lib/modules/audio_apr.ko /vendor/lib/modules/audio_q6_notifier.ko
+/vendor/lib/modules/audio_apr.ko: /vendor/lib/modules/audio_q6_notifier.ko
+/vendor/lib/modules/audio_native.ko: /vendor/lib/modules/audio_platform.ko /vendor/lib/modules/audio_q6.ko /vendor/lib/modules/audio_apr.ko /vendor/lib/modules/audio_q6_notifier.ko
+/vendor/lib/modules/audio_platform.ko: /vendor/lib/modules/audio_q6.ko /vendor/lib/modules/audio_apr.ko /vendor/lib/modules/audio_q6_notifier.ko
+/vendor/lib/modules/audio_digital_cdc.ko: /vendor/lib/modules/audio_q6.ko /vendor/lib/modules/audio_apr.ko /vendor/lib/modules/audio_q6_notifier.ko
+/vendor/lib/modules/audio_hdmi.ko:
+/vendor/lib/modules/audio_q6.ko: /vendor/lib/modules/audio_apr.ko /vendor/lib/modules/audio_q6_notifier.ko
+/vendor/lib/modules/audio_swr.ko:
+/vendor/lib/modules/audio_analog_cdc.ko: /vendor/lib/modules/audio_mbhc.ko /vendor/lib/modules/audio_wcd9xxx.ko /vendor/lib/modules/audio_wcd_core.ko /vendor/lib/modules/audio_q6.ko /vendor/lib/modules/audio_apr.ko /vendor/lib/modules/audio_q6_notifier.ko
+/vendor/lib/modules/audio_mbhc.ko: /vendor/lib/modules/audio_wcd_core.ko
+/vendor/lib/modules/audio_pinctrl_wcd.ko:
