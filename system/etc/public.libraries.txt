@@ -26,3 +26,11 @@ libsync.so
 libvulkan.so
 libwebviewchromium_plat_support.so
 libz.so
+libthumbnail_ffmpeg.so
+libavcodec.so
+libavformat.so
+libavutil.so
+libswscale.so
+libswresample.so
+libavdevice.so
+libavfilter.so

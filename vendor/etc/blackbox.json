@@ -50,6 +50,8 @@
                     {"path": "/blackbox/dji_logs/recovery",              "module": "recovery"},
                     {"path": "/blackbox/dji_logs/tombstones",              "module": "tombstones"},
                     {"path": "/blackbox/dji_logs/upgrade_logs",            "module": "upgrade"},
+                    {"path": "/blackbox/dji_logs/gnss_log",                "module": "gnss_log"},
+                    {"path": "/sdcard/Android/data/dji.go.v5/files/DCIM/lvmonitor",   "module": "lvmonitor"},
                     {"path": "/sdcard/Android/data/dji.go.v5/files/LOG",                 "module": "fly"},
                     {"path": "/sdcard/Android/data/dji.go.v5/files/FlightRecord","module": "flight_rec"}
                 ]

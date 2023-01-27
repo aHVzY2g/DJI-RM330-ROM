@@ -1,3 +1,4 @@
+#! /bin/bash
 readonly cmd_link_sw_trig_host_type=14
 readonly cmd_link_sw_trig_host_idx=7
 readonly trig_cmd_set=0x51
@@ -36,6 +37,7 @@ cmd_link_sw_test_cases=('01FFFF' '02FFFF' '01FFFF' \
 total_cnt=0
 pass_cnt=0
 fail_cnt=0
+fail_mb_ctrl_cnt=0
 
 wlm_echo()
 {
@@ -141,7 +143,8 @@ __test_link_mode_switch()
     if [ $rc -ne 0 ]; then
         wlm_echo "$resp"
         wlm_echo "failed to trigger link mode swich, return code $rc"
-        let fail_cnt+=1
+        let fail_mb_ctrl_cnt+=1
+        let total_cnt-=1
         return
     fi
 
@@ -177,7 +180,7 @@ test_link_mode_switch()
 
     while true; do
         __test_link_mode_switch $@
-        wlm_echo "link_mode statistics: total[$total_cnt] pass[$pass_cnt] fail[$fail_cnt]"
+        wlm_echo "link_mode statistics: total[$total_cnt] pass[$pass_cnt] fail[$fail_cnt] mb_ctrl_fail[$fail_mb_ctrl_cnt]"
         wlm_echo "----------------------------------------------------------------------------"
         sleep $period_s
     done

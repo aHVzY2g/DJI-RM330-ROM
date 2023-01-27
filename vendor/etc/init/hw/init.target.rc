@@ -375,6 +375,18 @@ service abc /system/bin/abc
     group root
     seclabel u:object_r:system_file:s0
 
+service dji_clean_blackbox /vendor/bin/dji_clean_blackbox.sh
+    class main
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:dji_clean_blackbox:s0
+
+on property:dji.clean.blackbox=1
+    setprop dji.clean.blackbox 0
+    start dji_clean_blackbox
+
 service dji_start_system /vendor/bin/dji_start_system.sh
     class main
     user root

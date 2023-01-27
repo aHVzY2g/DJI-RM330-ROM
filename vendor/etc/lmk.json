@@ -1,7 +1,5 @@
 {
     "proc_list": [
-               {"level":0,"type": 0,"name": "com.android.inputmethod.latin"},
-               {"level":0,"type": 0,"name": "com.google.android.inputmethod.latin"},
                {"level":0,"type": 0,"name": "com.android.permissioncontroller"},
                {"level":0,"type": 0,"name": "com.android.packageinstaller"},
                {"level":0,"type": 0,"name": "android.process.media"},
@@ -28,11 +26,8 @@
                {"level":0,"type": 1,"name": "ssgqmigd"},
                {"level":0,"type": 1,"name": "mdnsd"},
                {"level":0,"type": 1,"name": "mlid"},
-               {"level":0,"type": 1,"name": "logd"},
-               {"level":0,"type": 1,"name": "abc"},
                {"level":0,"type": 1,"name": "vendor.qrtr-ns"},
-			   
-               {"level":1,"type": 0,"name": "com.android.inputmethod.latin"},
-               {"level":1,"type": 0,"name": "com.google.android.inputmethod.latin"}
+               {"level":0,"type": 0,"name": "com.android.inputmethod.latin"},
+               {"level":0,"type": 0,"name": "com.google.android.inputmethod.latin"}
     ]
 }

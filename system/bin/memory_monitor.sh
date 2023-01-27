@@ -47,6 +47,8 @@ proc_Cached=0
 proc_SwapTotal=768
 proc_SwapFree=0
 proc_SwapUsed=0
+ion_memory=0
+dji_fly_kgsl=0
 
 top_iow=0
 top_cpu=0
@@ -71,7 +73,7 @@ echo ""
 time_begin=$((`date +%s`+2))
 last_log_date=`date '+%m-%d %H:%M:%S.000'`
 #echo "last_log_date=$last_log_date"
-title_str="UPTIME(m)\tCPU(0/4/7/L/T)\t\tGPU(F/L/T)\t\tDDR(F/L)\t\tTotal/MemAvailable/MemFree/Buffers/Cached/SwapUsed/MemUsed\tData_Size/Used/Avail"
+title_str="UPTIME(s) CPU(0/4/7/L/T)\tGPU(F/L/T)\tDDR(F/L)\tTotal/MemAvailable/MemFree/Buffers/Cached/SwapUsed/MemUsed/ION/FlyKgsl \t Size/Avail"
 
 memory_use() {
     proc_MemTotal=`head -4 /proc/meminfo |awk 'NR==1{b=$2;printf "%d", b/1024}'`
@@ -81,6 +83,11 @@ memory_use() {
 	proc_Cached=`head -5 /proc/meminfo |awk 'NR==5{b=$2;printf "%d", b/1024}'`
 	proc_SwapUsed=`awk '/SwapTotal/{total=$2}/SwapFree/{free=$2}END{printf "%d",(total-free)/1024}'  /proc/meminfo`
 	memory_used=`expr ${proc_MemTotal} - ${proc_MemAvailable} + ${proc_SwapUsed}`
+	 ###add all kgsl #`tail -1  /d/dma_buf/bufinfo  |awk '{b=$4;printf "%d", b/(1048576)}'`
+	ion_memory=`cat /d/kgsl/proc/[1-9]*/mem | grep -v gpuaddr |awk '{sum+=$3}END{printf "%d", sum/(1048576)}'`
+	pid=$(pidof "dji.go.v5")
+	dji_fly_kgsl=`cat /d/kgsl/proc/$pid/mem  |awk '{sum+=$3}END{printf "%d", sum/(1048576)}'`
+
 
     #echo "memory_used: $memory_used"
     ##echo "memory_cached: $memory_cache"
@@ -90,6 +97,7 @@ memory_use() {
 	#echo "proc_Buffers: $proc_Buffers"
 	#echo "proc_Cached: $proc_Cached"
 	#echo "proc_SwapUsed: $proc_SwapUsed"
+	#echo  "ion_memory: $ion_memory"
 }
 while true
 do
@@ -156,7 +164,7 @@ fi
 data_size=`df -h /data | grep data |awk 'NR == 1' | awk {'print $2'}`
 data_used=`df -h /data | grep data |awk 'NR == 1' | awk {'print $3'}`
 data_Avail=`df -h /data | grep data |awk 'NR == 1' | awk {'print $4'}`
-echo "data_size: $data_size"
+#echo "data_size: $data_size"
 
 
 memory_use
@@ -165,7 +173,7 @@ if [ $(($loop_count%20)) -eq 0 ]; then
     echo $title_str
 fi
 
-busybox printf "%s\t%03d/%02d/%02d/%02d/%02d\t%03d/%02d/%02d\t\t%03d/%03d\t\t\t%02d\t%02d%12d\t     %-5d   %02d    %02d      %02d\t%02s      %02s  %s\n" $up_time $cpuL_freq $cpuB_freq $cpuS_freq $cpu_load $cpu_temp $gpu_freq $gpu_load $gpu_temp $ddr_freq $ddr_load $proc_MemTotal $proc_MemAvailable $proc_MemFree $proc_Buffers $proc_Cached $proc_SwapUsed $memory_used $data_size $data_used $data_Avail
+busybox printf "%s  %03d/%02d/%02d/%02d/%02d\t%03d/%02d/%02d\t%03d/%03d \t%02d\t%02d%12d\t     %-5d   %02d    %02d      %02d   %02d    %02d\t %02s %s\n" $up_time $cpuL_freq $cpuB_freq $cpuS_freq $cpu_load $cpu_temp $gpu_freq $gpu_load $gpu_temp $ddr_freq $ddr_load $proc_MemTotal $proc_MemAvailable $proc_MemFree $proc_Buffers $proc_Cached $proc_SwapUsed $memory_used $ion_memory $dji_fly_kgsl $data_size $data_Avail
 
 sleep $loop_delay
 done

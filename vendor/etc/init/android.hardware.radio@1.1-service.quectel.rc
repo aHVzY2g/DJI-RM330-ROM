@@ -1,0 +1,9 @@
+service quectel.ril-daemon /vendor/bin/hw/rild -l /vendor/lib/hw/libquectel-ril.so
+    class main
+    user radio
+    group radio cache inet misc audio sdcard_rw log
+    capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
+    interface android.hardware.radio@1.0::IRadio slot1
+    interface android.hardware.radio@1.1::IRadio slot1
+    interface android.hardware.radio.config@1.0::IRadioConfig default
+

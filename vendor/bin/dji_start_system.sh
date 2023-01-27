@@ -9,6 +9,12 @@ function memory_monitor()
     fi
 }
 
+function mainroute()
+{
+    ip rule add from all lookup main pref 3000
+    ip -6 rule add table main
+}
+
 function iproute()
 {
     ip rule add from all lookup main pref 9999
@@ -42,11 +48,30 @@ while [ "$COUNTER" -lt 3 ]; do
 done
 
 ## memory monitor
-#setprop persist.sys.memory_monitor 1
-#memory_monitor
+setprop persist.sys.memory_monitor 1
+memory_monitor
+
+logwrapper  wifi_info.sh &
 
 ## set dji performance mode
 setprop dji.sys.perf 1
+
+while true; do
+
+    local upgrade_test=$(getprop "persist.upgrade.test")
+    if [ $upgrade_test -ne 0 ]; then
+      echo " in upgrade_test status, need check ip route main table sometime"
+      main_table=$(ip rule | grep main)
+      if [ -z "$main_table" ]; then
+        mainroute
+      fi
+    else
+      echo "the upgrade_test value is not set,break now"
+      break;
+    fi
+
+    sleep 2
+done
 
 # pull up gpio 62 for lte dongel of rm510
 #echo --pin 62 > /d/gpio_dbg/pin

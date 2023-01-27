@@ -184,7 +184,7 @@
         },
         "dji_sdrs_agent":{
             "log":{
-                "default_level": "info",
+                "default_level": "error",
                 "default_channel": "android_log",
                 "default_mask": "enable_all",
                 "default_format": [
@@ -311,6 +311,9 @@
                       "local": {"direct_host": "vt_gnd", "index": 6}},
                 "10": {"status": 0,"target_machine": 0,"target": "camera", "index": 0, "channel": "local", "distance": 0, "protocol": "logic", "route_control": {"wl_mode": 3},
                       "local": {"direct_host": "vt_gnd", "index": 7}},
+                "10": {"status": 1,"target_machine": 0,"target": "camera", "index": 0, "channel": "bulk", "distance": 0, "protocol": "hp",
+                      "route_control": {"hs_control": 1, "master_rt" : 0, "auto_switch": 1, "uevent_path": "/sys/bus/usb/devices/usb1/1-1/"},
+                      "bulk": {"dev": "/bulk/high_speed_to_upgrade", "host": 1, "reconnect": 1, "ep_in": 130, "ep_out": 2, "vid": 11427, "pid": 4128, "interface": 1}},
                 "11": {"status": 0,"target_machine": 0,"target": "camera", "index": 1, "channel": "uart",  "distance": 0, "protocol": "v1", "route_control": {"wl_mode": 0},
                     "uart": {"interface": "/dev/ttyACM:v2CA3p1020", "baudrate": 8000000, "parity": 0, "stopbit": 0, "wordlen": 8}},
                 "11": {"status": 0,"target_machine": 0,"target": "camera", "index": 1, "channel": "local", "distance": 0, "protocol": "logic", "route_control": {"wl_mode": 1},
@@ -342,8 +345,70 @@
                 "15": {"status": 0,"target_machine": 0,"target": "camera", "index": 5, "channel": "local", "distance": 0, "protocol": "logic", "route_control": {"wl_mode": 3},
                       "local": {"direct_host": "vt_gnd", "index": 7}},
                 "20": {"status": 1, "target": "mobile", "index": 0, "channel": "wl", "distance": 0, "protocol": "hp",
+                    "sync_route_msg_table": {
+                        "camera_e2_to_app_0": {
+                            "source_machine": 0,
+                            "source_host": {"host": "camera", "index": 7},
+                            "cmd_set": 0, "cmd_id": 38,
+                            "protocol": "logic"
+                        },
+                        "camera_e2_to_app_1": {
+                            "source_machine": 0,
+                            "source_host": {"host": "camera", "index": 7},
+                            "cmd_set": 0, "cmd_id": 39,
+                            "protocol": "logic"
+                        },
+                        "camera_e1e_to_app_0": {
+                            "source_machine": 0,
+                            "source_host": {"host": "camera", "index": 3},
+                            "cmd_set": 0, "cmd_id": 38,
+                            "protocol": "logic"
+                        },
+                        "camera_e1e_to_app_1": {
+                            "source_machine": 0,
+                            "source_host": {"host": "camera", "index": 3},
+                            "cmd_set": 0, "cmd_id": 39,
+                            "protocol": "logic"
+                        },
+                        "blackbox_e2_to_app": {
+                            "source_machine": 0,
+                            "source_host": {"host": "blackbox", "index": 0},
+                            "cmd_set": 0, "cmd_id": 42,
+                            "protocol": "logic"
+                        },
+                        "blackbox_e1e_to_app": {
+                            "source_machine": 0,
+                            "source_host": {"host": "blackbox", "index": 1},
+                            "cmd_set": 0, "cmd_id": 42,
+                            "protocol": "logic"
+                        },
+                        "blackbox_rc_to_app": {
+                            "source_machine": 0,
+                            "source_host": {"host": "blackbox", "index": 3},
+                            "cmd_set": 0, "cmd_id": 42,
+                            "protocol": "logic"
+                        },
+                        "0xea_to_app": {
+                            "source_machine": 0,
+                            "source_host": {"host": "blackbox", "index": 0},
+                            "cmd_set": 0, "cmd_id": 234,
+                            "protocol": "logic"
+                        },
+                        "0xf9_to_app": {
+                            "source_machine": 0,
+                            "source_host": {"host": "blackbox", "index": 0},
+                            "cmd_set": 0, "cmd_id": 249,
+                            "protocol": "logic"
+                        },
+                        "0afe_to_app": {
+                            "source_machine": 0,
+                            "source_host": {"host": "blackbox", "index": 0},
+                            "cmd_set": 10, "cmd_id": 254,
+                            "protocol": "logic"
+                        }
+                      },
                       "wl": {"interface": "iwlan0", "local_port": 40007, "remote_address": "0.0.0.0", "remote_port": 0, "server": true, "protocol": "tcp", "txbuff_size": 1048576}},
-                "20": {"status": 1, "target": "mobile", "index": 0, "channel": "wl", "distance": 0, "protocol": "raw",
+		        "20": {"status": 1, "target": "mobile", "index": 0, "channel": "wl", "distance": 0, "protocol": "raw",
                       "route_control": {"hs_control": 1, "sync_route": 1, "master_rt" : 1},
                       "wl": {"interface": "iwlan0", "local_port": 40007, "remote_address": "0.0.0.0", "remote_port": 0, "server": true, "protocol": "tcp"}},
                 "21": {"status": 1, "target": "mobile", "index": 1, "channel": "wl", "distance": 0, "protocol": "v1",
@@ -544,6 +609,9 @@
                       "local": {"direct_host": "vt_gnd", "index": 6}},
                 "95": {"status": 0,"target_machine": 0,"target": "vt_air", "index": 5, "channel": "local", "distance": 0, "protocol": "logic", "route_control": {"wl_mode": 3},
                       "local": {"direct_host": "vt_gnd", "index": 7}},
+                "95": {"status": 1,"target_machine": 0,"target": "vt_air", "index": 5, "channel": "bulk", "distance": 0, "protocol": "hp",
+                      "route_control": {"hs_control": 1, "master_rt" : 0, "auto_switch": 1, "uevent_path": "/sys/bus/usb/devices/usb1/1-1/"},
+                      "bulk": {"dev": "/bulk/high_speed_to_upgrade", "host": 1, "reconnect": 1, "ep_in": 130, "ep_out": 2, "vid": 11427, "pid": 4128, "interface": 1}},
                 "96": {"status": 0,"target_machine": 0,"target": "vt_air", "index": 6, "channel": "uart",  "distance": 0, "protocol": "v1", "route_control": {"wl_mode": 0},
                     "uart": {"interface": "/dev/ttyACM:v2CA3p1020", "baudrate": 8000000, "parity": 0, "stopbit": 0, "wordlen": 8}},
                 "96": {"status": 0,"target_machine": 0,"target": "vt_air", "index": 6, "channel": "local", "distance": 0, "protocol": "logic", "route_control": {"wl_mode": 1},
@@ -562,6 +630,8 @@
                       "wl": {"interface": "ip_to_pc", "local_port": 8901, "remote_address": "0.0.0.0", "remote_port": 0, "server": true, "protocol": "tcp"}},
                 "a2": {"status": 1, "target": "pc", "index": 2, "channel": "wl", "distance": 0, "protocol": "v1",
                       "wl": {"interface": "ip_to_pc", "local_port": 8901, "remote_address": "0.0.0.0", "remote_port": 0, "server": true, "protocol": "tcp"}},
+                "a3": {"status": 1, "target": "pc", "index": 3, "channel": "wl", "distance": 0, "protocol": "v1",
+                      "wl": {"interface": "ip_to_pc", "local_port": 8901, "remote_address": "0.0.0.0", "remote_port": 0, "server": true, "protocol": "tcp"}},
                 "a0": {"status": 0,"target_machine": 0,"target": "pc", "index": 0, "channel": "bulk",  "distance": 0, "protocol": "v1",
                     "sync_route_msg_table": {
                             "blackbox_1d3_to_da3": {
@@ -575,6 +645,9 @@
                 "a1": {"status": 0,"target_machine": 0,"target": "pc", "index": 1, "channel": "bulk",  "distance": 0, "protocol": "v1",
                     "bulk": {"dev": "bulk_to_pc", "host": 0, "reconnect": 0, "ep_in": 0, "ep_out": 0, "vid": 0, "pid": 0, "interface": 3}},
                 "a2": {"status": 0,"target_machine": 0,"target": "pc", "index": 2, "channel": "bulk",  "distance": 0, "protocol": "v1",
+                    "bulk": {"dev": "bulk_to_pc", "host": 0, "reconnect": 0, "ep_in": 0, "ep_out": 0, "vid": 0, "pid": 0, "interface": 3}},
+
+                "a5": {"status": 0,"target_machine": 0,"target": "pc", "index": 5, "channel": "bulk",  "distance": 0, "protocol": "v1",
                     "bulk": {"dev": "bulk_to_pc", "host": 0, "reconnect": 0, "ep_in": 0, "ep_out": 0, "vid": 0, "pid": 0, "interface": 3}},
                 "a6": {"status": 0,"target_machine": 0,"target": "pc", "index": 6, "channel": "uart",  "distance": 0, "protocol": "v1",
                     "uart": {"interface": "/dev/ttyACM:v2CA3p1020", "baudrate": 8000000, "parity": 0, "stopbit": 0, "wordlen": 8}},
@@ -695,6 +768,12 @@
                 "112": {"status": 0,"target_machine": 0,"target": "mvision", "index": 2, "channel": "local", "distance": 0, "protocol": "logic", "route_control": {"wl_mode": 1},
                       "local": {"direct_host": "vt_gnd", "index": 6}},
                 "112": {"status": 0,"target_machine": 0,"target": "mvision", "index": 2, "channel": "local", "distance": 0, "protocol": "logic", "route_control": {"wl_mode": 3},
+                      "local": {"direct_host": "vt_gnd", "index": 7}},
+                "113": {"status": 0,"target_machine": 0,"target": "mvision", "index": 3, "channel": "uart",  "distance": 0, "protocol": "v1", "route_control": {"wl_mode": 0},
+                    "uart": {"interface": "/dev/ttyACM:v2CA3p1020", "baudrate": 8000000, "parity": 0, "stopbit": 0, "wordlen": 8}},
+                "113": {"status": 0,"target_machine": 0,"target": "mvision", "index": 3, "channel": "local", "distance": 0, "protocol": "logic", "route_control": {"wl_mode": 1},
+                      "local": {"direct_host": "vt_gnd", "index": 6}},
+                "113": {"status": 0,"target_machine": 0,"target": "mvision", "index": 3, "channel": "local", "distance": 0, "protocol": "logic", "route_control": {"wl_mode": 3},
                       "local": {"direct_host": "vt_gnd", "index": 7}},
                 "114": {"status": 0,"target_machine": 0,"target": "mvision", "index": 4, "channel": "uart",  "distance": 0, "protocol": "v1", "route_control": {"wl_mode": 0},
                     "uart": {"interface": "/dev/ttyACM:v2CA3p1020", "baudrate": 8000000, "parity": 0, "stopbit": 0, "wordlen": 8}},
@@ -1077,6 +1156,8 @@
                 "97": {"status": 1,"target_machine": 0,"target": "vt_air", "index": 7, "channel": "wl", "distance": 0, "protocol": "v1",
                       "wl": {"interface": "iwlan0", "local_port": 0, "remote_address": "0.0.0.0", "remote_port": 0, "server": false,"protocol": "lte", "lte_type": 1}},
 
+                "a0": {"status": 1, "target": "pc", "index": 0, "channel": "local", "distance": 0, "protocol": "logic",
+                    "local": {"direct_host": "mobile", "index": 5}},
                 "b0": {"status": 0,"target_machine": 0,"target": "battery", "index": 0,  "channel": "local", "distance": 0,  "protocol": "logic",   "route_control": {"wl_mode": 0},
                       "local": {"direct_host": "mobile", "index": 5}},
                 "b0": {"status": 0,"target_machine": 0,"target": "battery", "index": 0, "channel": "wl", "distance": 0, "protocol": "v1",           "route_control": {"wl_mode": 1},
@@ -1124,6 +1205,12 @@
                       "wl": {"interface": "iwlan0", "local_port": 0, "remote_address": "0.0.0.0", "remote_port": 0, "server": false,"protocol": "lte", "lte_type": 1}},
                 "f3": {"status": 0, "target": "s_to_p_air", "index": 3, "channel": "local", "distance": 0,  "protocol": "logic",            "route_control": {"wl_mode": 3},
                       "local": {"direct_host": "vt_gnd", "index": 7}},
+                "124": {"status": 0,"target_machine": 0,"target": "bvision", "index": 4, "channel": "local", "distance": 0, "protocol": "logic",           "route_control": {"wl_mode": 0},
+                      "local": {"direct_host": "mobile", "index": 5}},
+                "124": {"status": 0,"target_machine": 0,"target": "bvision", "index": 4, "channel": "wl", "distance": 0, "protocol": "v1",                 "route_control": {"wl_mode": 1},
+                      "wl": {"interface": "iwlan0", "local_port": 0, "remote_address": "0.0.0.0", "remote_port": 0, "server": false,"protocol": "lte", "lte_type": 1}},
+                "124": {"status": 0,"target_machine": 0,"target": "bvision", "index": 4, "channel": "local", "distance": 0, "protocol": "logic",           "route_control": {"wl_mode": 3},
+                      "local": {"direct_host": "vt_gnd", "index": 7}},
       	        "1d3": {"status": 1, "target": "blackbox", "index": 3, "channel": "local", "distance": 0, "protocol": "logic",
                       "local": {"direct_host": "blackbox", "index": 3}},
                 "1e1": {"status": 1, "target": "test",   "index": 1, "channel": "local", "distance": 0,  "protocol": "logic",
@@ -1132,27 +1219,37 @@
         },
         "config": {
             "type":              "gnd",
+            "dev_type":           "rc",
+            "runtime":            "android",
+            "service_module_id":"0x0e06",
             "local_wlm_host_id": "0x0e07",
             "peer_wlm_host_id":  "0x0907",
-            "lteweb": {
-                "role":     "GND",
-                "op_type":  "bind",
-                "bind_config": {
-                    "use_fixed_pair_info" :      0,
-                    "pair_info_accessible":      0,
-                    "pair_info_request_host_id": "0x0900",
-                    "fixed_pair_info": {
-                        "uav_sn":   "uav123456",
-                        "mrc_sn":   "mrc123456",
-                        "arc_sn":   "arc123456",
-                        "aes_rand": 6
-                    },
-                    "pair_info_desc": {
-                        "1": {"name": "uav_sn",    "source": "file", "file_path": "/cali/sdr/sparrow/IE1000_RF/nvram/cp_nvram.bin", "offset": 36,  "len": 4},
-                        "2": {"name": "mrc_sn",    "source": "file", "file_path": "/cali/sdr/sparrow/IE1000_RF/nvram/cp_nvram.bin", "offset": 40,  "len": 4},
-                        "3": {"name": "aux_rc_sn", "source": "file", "file_path": "/cali/sdr/sparrow/IE1000_RF/nvram/cp_nvram.bin", "offset": 44,  "len": 4},
-                        "4": {"name": "aes_rand",  "source": "file", "file_path": "/cali/sdr/sparrow/IE1000_RF/nvram/cp_nvram.bin", "offset": 288, "len": 28}
-                    }
+            "local_router_host_id": "0x0205",
+            "dongle_usb_workaround":{
+                "cmd_poweroff": "echo 0 > /sys/bus/platform/devices/200f000.qcom,spmi:qcom,pm8953@0:qcom,pm8953_typec@bf00/cc_state",
+                "cmd_poweron": "echo 1 > /sys/bus/platform/devices/200f000.qcom,spmi:qcom,pm8953@0:qcom,pm8953_typec@bf00/cc_state"
+            },
+            "control_bool_use_libwlm":false,
+	      "video_channel_number":1,
+	      "enable_dongle":"dji_ril",
+            "product_type": "RM330",
+            "b_test_env": false,
+            "single_frequency_cn_list":[
+                  "JP",
+                  "RU",
+                  "IL",
+                  "UA",
+                  "KZ"
+            ],
+            "lte_black_list":[
+                  "US",
+                  "CA"
+	      ],
+            "dev_manage":{
+                "dongle_upgrade":{
+                    "version":0,
+                    "dongle_upgrade_method":"full",
+                    "dongle_fw_dir":"/data"
                 }
             }
         }
@@ -1399,7 +1496,11 @@
                     "multi_type_default": "wm162",
                     "support_type": [
                         {"drone_type": 7680, "drone_name": "wm260", "firmware_fold": "wm260", "nvram_fold": "nvram_wm260"},
-                        {"drone_type": 11776,"drone_name": "wm162", "firmware_fold": "wm162", "nvram_fold": "nvram_wm162"}
+                        {"drone_type": 11776,"drone_name": "wm162", "firmware_fold": "wm162", "nvram_fold": "nvram_wm162"},
+                        {"drone_type": 8192, "drone_name": "wm232", "firmware_fold": "wm232", "nvram_fold": "nvram_wm232"},
+                        {"drone_type": 17920, "drone_name": "wm2605", "firmware_fold": "wm2605", "nvram_fold": "nvram_wm2605"},
+                        {"drone_type": 16384, "drone_name": "wm261", "firmware_fold": "wm261", "nvram_fold": "nvram_wm261"},
+                        {"drone_type": 57699, "drone_name": "wm163", "firmware_fold": "wm163", "nvram_fold": "nvram_wm163"}
                     ]
                 }
             },

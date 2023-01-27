@@ -1,81 +1,405 @@
 {
-    "basic": {
-        "version":               0,
-        "dev_type":              "RC",
-        "dev_role":              "master_RC",
-        "lte_enable":            1,
-        "sdr_enable":            1,
-        "wifi_enable":           0,
-        "sdr_agent_host_id":     "0x0e00",
-        "wifi_agent_host_id":    "0x0000",
-        "wifi_interact_host_id": "0x0000",
-        "lte_agent_host_id":     "0x0e06",
-        "local_router_host_id":  "0x0205",
-        "peer_wlm_host_id":      "0x0907",
-        "wifi_hw_controller":    "0x0000",
-        "osd_receiver_host_id":  "0x0200",
-        "osd_sync_freq":         5,
-        "add_test_helper":       0,
-        "ls_auto_enable":        0
-    },
-    "master_internal_com": {
-        "share_info_sync_freq":  10,
-        "delay_start_time_ms":   4800
-    },
-    "device_manager": {
-        "dev_state_update_freq": 10,
-        "register_interval_ms":  600
-    },
-    "msg_dispatch": {
-        "multipack_ver":            "logic",
-        "multipack_sdr_enable":     0,
-        "multipack_lte_enable":     0,
-        "multipack_wifi_enable":    0,
-        "multipack_max_count":      30,
-        "multipack_max_timeout_ms": 100,
-        "white_list": []
-    },
-    "link_mode": {
-        "max_rectify_cnt":     5,
-        "rectify_interval_ms": 800,
-        "link_mode_policy":    "flexible",
-        "default_link_mode": {
-            "command":         "SDR_ONLY",
-            "liveview":        "SDR_ONLY",
-            "common_data":     "SDR_ONLY"
+    "common": {
+        "version":                3,
+        "print_level":            [1, 1, 0, 0, 0],
+        "product":                "RM330",
+        "soc":                    "8053",
+        "libwlm_module_id":       "0x0e07",
+        "role":                   "master",
+
+        "sdr_enable":             1,
+        "sdr_agent_host_id":      "0x0e00",
+        "lte_enable":             1,
+        "lte_agent_host_id":      "0x0e06",
+        "wifi_enable":            0,
+        "wifi_interact_host_id":  "0x0000",
+        "wifi_agent_host_id":     "0x0000",
+        "local_router_host_id":   "0x0205",
+        "peer_wlm_host_id":       "0x0907",
+        "local_wlm_host_id":      "0x0e07",
+
+        "enable_modules": {
+            "event_cb":         1,
+            "ds_master":        0,
+            "ds_slave":         0,
+            "dev_mgr":          1,
+            "agt_mgr":          1,
+            "link_sw":          1,
+            "msg_filter":       0,
+            "msg_dspt":         1,
+            "cmd_fusion":       1,
+            "link_state":       1,
+            "event_track":      1,
+            "data_fwd":         0,
+            "adaptive_mode":    0,
+            "power_ctrl":       0,
+            "rm_ctrl":          0
+        },
+        "tools": {
+            "path":             "/data/dji_wlm.log",
+            "pidstat":          0,
+            "top":              0,
+            "date":             0
+        },
+        "features": {
+            "lm_follow":        1
         }
     },
-    "min_bw_bps": {
-        "common_command": 50000,
-        "rt_command":     50000,
-        "liveview":       300000,
-        "common_data":    300000
+    "rm_ctrl": {
+        "debug_print":          0,
+        "enable_test":          0,
+        "cfg_done":             1,
+        "avoid_strategy":       0,
+        "priority":             1,
+        "publisher": {
+            "0x0200":  ["0x0900"],
+            "0x0700":  ["0x0900"],
+            "0x0900":  ["0x0900"]
+        },
+        "subscriber": {
+            "0x0900":  ["0x0200"]
+        }
     },
-    "rc_hosts": ["0x0200", "0x0205", "0x0207", "0x0600", "0x0d00", "0x0d01", "0x0e00", "0x0e07","0x0e06"],
-    "glass_hosts": ["0x1c00", "0x1c01", "0x1c07", "0x1d00"],
-    "route_switch": {
-		"1": {"scene": "SDR_ONLY",
-              "steps": ["0x0205", "0x0e06"]},
-		"2": {"scene": "LTE_ONLY",
-              "steps": ["0x0e06", "0x0205"]},
-		"3": {"scene": "HYBRID_LTE_SDR",
-              "steps": ["0x0e06", "0x0205"]}
-
+    "power_ctrl": {
+        "debug_print":          0,
+        "cfg_done":             1,
+        "idle_power_level":     [2, 0, 2],
+        "scenario": {
+            "shutdown": {
+                "power_level": {
+                    "sdr":     5,
+                    "lte":     5,
+                    "wifi":    5
+                },
+                "priority":    0
+            },
+            "standby": {
+                "power_level": {
+                    "sdr":     4,
+                    "lte":     5,
+                    "wifi":    5
+                },
+                "priority":    0
+            },
+            "drop": {
+                "power_level": {
+                    "sdr":     1,
+                    "lte":     5,
+                    "wifi":    5
+                },
+                "priority":    0
+            },
+            "upgrade_download": {
+                "power_level": {
+                    "sdr":     1,
+                    "lte":     5,
+                    "wifi":    5
+                },
+                "priority":    2
+            },
+            "upgrade_push": {
+                "power_level": {
+                    "sdr":     0,
+                    "lte":     5,
+                    "wifi":    5
+                },
+                "priority":    2
+            },
+            "upgrade_exec": {
+                "power_level": {
+                    "sdr":     1,
+                    "lte":     5,
+                    "wifi":    5
+                },
+                "priority":    2
+            },
+            "udisk": {
+                "power_level": {
+                    "sdr":     1,
+                    "lte":     5,
+                    "wifi":    5
+                },
+                "priority":    3
+            },
+            "osmo": {
+                "power_level": {
+                    "sdr":     5,
+                    "lte":     5,
+                    "wifi":    0
+                },
+                "priority":    3
+            },
+            "download": {
+                "power_level": {
+                    "sdr":     0,
+                    "lte":     0,
+                    "wifi":    0
+                },
+                "priority":    3
+            },
+            "playback": {
+                "power_level": {
+                    "sdr":     0,
+                    "lte":     0,
+                    "wifi":    0
+                },
+                "priority":    3
+            },
+            "economical_bt": {
+                "power_level": {
+                    "sdr":     1,
+                    "lte":     1,
+                    "wifi":    5
+                },
+                "priority":    3
+            },
+            "full_power": {
+                "power_level": {
+                    "sdr":     0,
+                    "lte":     0,
+                    "wifi":    5
+                },
+                "priority":    3
+            },
+            "not_flying": {
+                "power_level": {
+                    "sdr":     1,
+                    "lte":     0,
+                    "wifi":    1
+                },
+                "priority":    3
+            }
+        }
     },
+    "event_cb": {
+        "debug_print":          0,
+        "cfg_done":             1
+    },
+    "dev_mgr":{
+        "dev_type":                 "RC",
+        "dev_role":                 "master_RC",
+        "debug_print":              0,
+        "cfg_done":                 1,
+        "dev_node": {
+            "debug_print":          0,
+            "cfg_done":             1,
+            "dev_type": {
+                "debug_print":      1,
+                "cfg_done":         1
+            },
+            "dev_link": {
+                "debug_print":      0,
+                "cfg_done":         1,
+                "cmd_chnnl_nr":     1,
+                "lv_chnnl_nr":      1,
+                "dl_chnnl_nr":      1
+            },
+            "msg_consumer": {
+                "debug_print":      0,
+                "cfg_done":         1,
+                "msg_stat":         0
+            }
+        },
+        "dev_list": {
+            "debug_print":          0,
+            "cfg_done":             1
+        },
+        "beacon": {
+            "debug_print":          0,
+            "cfg_done":             1,
+            "xmit_intvl_ms":        500,
+            "check_intvl_count":    3
+        },
+        "shm_mgr": {
+            "debug_print":          0,
+            "cfg_done":             1,
+            "sync_freq":            10,
+            "bandwidth": {
+                "lte_max_bw_bps" : 3600000,
+                "min_bw_bps": {
+                    "common_command": 50000,
+                    "rt_command":     50000,
+                    "liveview":       512000,
+                    "common_data":    512000
+                }
+            }
+        }
+    },
+    "agt_mgr": {
+        "cfg_done":                 1,
+        "debug_print":              0,
+        "stat_print":               0,
+        "enable_test":              0,
+        "bw_fb_enable":             0,
+        "subscribe_lv":             0,
+        "lv_host_id":               "0x0f00",
+        "protect_fly_dev":          1,
+        "sdr_threshold_kbps":       2000,
+        "lte_threshold_kbps":       600,
+        "protect_stream":           1,
+        "enable_protect_stream":    1,
+        "stream_threshold_kbps":    512,
+        "stream_upthreshold_kbps":  7000,
+        "lte_max_bw":               4000,
+        "def_expt_rate":            [50, 50, 0],
+        "force_expt_rate_enable":   1,
+        "force_expt_rate":          [50, 50, 0],
+        "sdr_rpt_tunnel_map":       [0, 1, 2],
+        "lte_rpt_tunnel_map":       [0, 1, 2],
+        "i_frame_tunnel_map":       [0, 1, 2],
+        "lv_def_tunnel_map":        [0, 1, 2],
+        "bw_process": {
+            "SDR": {
+                "drop_intvl_ms":    2000,
+                "filter_item_cnt":  10,
+                "good_thd_kbps":       [10000, 12000, 14000],
+                "good_thd_cnt":        [30,    20,    10],
+                "middle_upthd_kbps":   [10000, 8000,  6000],
+                "middle_downthd_kbps": [2000,  3000,  4000],
+                "middle_thd_cnt":      [15,    10,    5],
+                "bad_thd_kbps":        [2000,  1500,  1000],
+                "bad_thd_cnt":         [15,    10,    5]
+            },
+            "LTE": {
+                "drop_intvl_ms":    1000,
+                "filter_item_cnt":  20,
+                "good_thd_kbps":       [700, 2048],
+                "good_thd_cnt":        [25,   10],
+                "bad_thd_kbps":        [700, 550],
+                "bad_thd_cnt":         [25,   10]
+            }
+        },
+        "agt_rpt": {
+            "SDR": {
+                "rpt_ver":  "v1",
+                "enable":   0,
+                "chnnl":    "none"
+            },
+            "LTE": {
+                "rpt_ver":  "v1",
+                "enable":   0,
+                "chnnl":    "none"
+            },
+            "WIFI": {
+                "rpt_ver":  "v1",
+                "enable":   0,
+                "chnnl":    "none"
+            }
+        }
+    },
+    "msg_filter": {
+        "debug_print" :         0,
+        "cfg_done":             1,
+        "filter_level" : {
+            "level0": {
+                "bw_kbps": 512,
+                "inc_timeslice_ms": 0,
+                "inc_interval_count": 0
+            },
+            "level1": {
+                "bw_kbps": 256,
+                "inc_timeslice_ms": 0,
+                "inc_interval_count": 2
+            },
+            "level2": {
+                "bw_kbps": 128,
+                "inc_timeslice_ms": 0,
+                "inc_interval_count": 4
+            }
+        },
+        "cmd_set": {},
+        "cmd_set_id": {}
+    },
+    "event_track": {
+        "cfg_done":               1,
+        "debug_print":            0,
+        "target_host_id":         "0x0200",
+        "rpt_cycl_id":            "fw_0e07_wlm_gnd_rpt_cycl",
+        "rpt_once_id":            "fw_0e07_wlm_gnd_rpt_once",
+        "rpt_cyc_time_ms":        30000
+    },
+    "lk_state": {
+        "cfg_done":               1,
+        "debug_print":            0,
+        "osd_receiver_host_id":   "0x0200",
+        "osd_sync_freq":          5
+    },
+    "ds_master": {
+        "cfg_done":    1,
+        "self_id":     0,
+        "debug_print": 0,
+        "neighbor": {
+        }
+    },
+    "data_fwd": {
+        "cfg_done":    1,
+        "debug_print": 0
+    },
+    "link_sw": {
+        "cfg_done":    1,
+        "debug_print": 0,
+        "link_ctrl": {
+            "cfg_done":    1,
+            "debug_print": 0
+        },
+        "route_ctrl": {
+            "cfg_done":    1,
+            "debug_print": 0,
+            "rc_hosts": ["0x0200", "0x0205", "0x0207", "0x0600", "0x0605", "0x0d00", "0x0d01", "0x0d02", "0x0a03",
+                         "0x0e00", "0x0e06", "0x0e07", "0x1a06"],
+            "lift_hosts": ["0x0200", "0x0205", "0x0207", "0x0600", "0x0d01", "0x0d02",
+                           "0x0e00", "0x0e06", "0x0e07", "0x1a06","0x0900", "0x0901", "0x0905"],
+            "glass_hosts": ["0x1c00", "0x1c01", "0x1c07", "0x1d00"],
+            "route_switch": {
+                "1": {"scene": "SDR_ONLY",
+                      "steps": ["0x0205", "0x0e06"]},
+                "2": {"scene": "LTE_ONLY",
+                      "steps": ["0x0e06", "0x0205"]},
+                "3": {"scene": "HYBRID_LTE_SDR",
+                      "steps": ["0x0e06", "0x0205"]}
+            }
+        }
+    },
+    "msg_dispatch": {
+        "cfg_done":                  1,
+        "debug_print":               0,
+        "msg_stat":                  0,
+        "fmsg_attr_ver":             2,
+        "multipack_ver":             "logic",
+        "multipack_sdr_enable":      0,
+        "multipack_lte_enable":      0,
+        "multipack_wifi_enable":     0,
+        "multipack_max_count":       30,
+        "multipack_max_timeout_ms":  100,
+        "white_list": [],
 
+        "enable_dls":                0,
+        "dls_name":                  "send",
+        "aggregate_sdr_enable":      0,
+        "aggregate_lte_enable":      0,
+        "aggregate_wifi_enable":     0,
+        "aggregate_max_timeout_ms":  50
+    },
+    "cmd_fusion": {
+        "cfg_done":                 1,
+        "debug_print":              0,
+
+        "enable_dls":               0,
+        "dls_name":                 "recv"
+    },
+    "adaptive_mode": {
+        "cfg_done":                 1,
+        "debug_print":              0
+    },
     "share_info": {
         "enable":         1,
+        "sync_on":        0,
         "channel":        "shm",
         "shm_file":       "/dev/wlm_shm",
         "shm_size_bytes": 1024,
-        "shm_key":        123
-    },
-    "internal_com": {
-        "enable":      0,
-        "host_id":     0,
-        "listen_port": 0,
-        "targets": {
-		}
+        "shm_key":        123,
+        "shm_sync":       "socket",
+        "socket_path":    "/dev/wlm_shm_sync"
     },
     "wl_manager_library": {
         "common": {
@@ -94,6 +418,9 @@
                     ],
                     "datas": {
                                 "data0": {
+                                        "header_type": "5D",
+                                        "fusion_version": "v2",
+                                        "from_usb_multi": false,
                                         "wl_data_type": "liveview1",
                                         "link_number": 2,
                                         "recv_mode": "controlled",
@@ -163,14 +490,14 @@
                                                 "send_target": "wlm_share"
                                             }
                                         }
-                                }, 
+                                },
                                 "data1": {
                                         "wl_data_type": "selfdefine1",
                                         "link_number": 1,
                                         "recv_mode": "link_selfdefine",
                                         "send_mode": "link_selfdefine",
-					"rm_libwlm_header": false,
-					"check_libwlm_header": false,
+                                        "rm_libwlm_header": false,
+                                        "check_libwlm_header": false,
                                         "link_selfdefine": {
                                                 "enable": true,
                                                 "input": 2
@@ -195,7 +522,7 @@
                                         }
                                 }
                     }
-                }       
+                }
         }
     }
 }

@@ -1,0 +1,10 @@
+service sysobserverd /system/bin/sysobserverd
+	user root
+	group root system
+	disabled
+
+on property:sys.boot_completed=1 && property:persist.dji.sysobserver.enable=0
+	stop sysobserverd
+
+on property:sys.boot_completed=1 && property:persist.dji.sysobserver.enable=1
+	start sysobserverd

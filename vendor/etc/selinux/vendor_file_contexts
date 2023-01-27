@@ -6,6 +6,7 @@
 /(system)/bin/dji_link		u:object_r:dji_link_exec:s0
 /(system)/bin/dji_upgrade		u:object_r:dji_rc_upgrade_exec:s0
 /(system)/bin/dji_mb_ctrl		u:object_r:dji_mb_ctrl_exec:s0
+/(system)/bin/sysobserverd		u:object_r:dji_sysobserver_exec:s0
 /(system)/bin/dji_blackbox		u:object_r:dji_blackbox_exec:s0
 /(system)/bin/dji_sdrs_agent		u:object_r:dji_sdrs_agent_exec:s0
 /(vendor|system/vendor)/bin/ks		u:object_r:mdm_helper_exec:s0
