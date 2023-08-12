@@ -638,8 +638,13 @@ function enable_swap() {
         echo 70 > /proc/sys/vm/swap_ratio
 
         # Swap disk - 512MB size
-        if [ ! -f /data/vendor/swap/swapfile ]; then
+		swap_file_size_str=`du /data/vendor/swap/swapfile`
+		swap_file_size=${swap_file_size_str:0:6}
+		SWAP_ENABLE_SIZE=524288
+		echo "swap_file_size :  $swap_file_size"
+        if [ ! -f /data/vendor/swap/swapfile ] || [ "$swap_file_size" -le "SWAP_ENABLE_SIZE" ]; then
             dd if=/dev/zero of=/data/vendor/swap/swapfile bs=1m count=512
+			echo "================== create swapfile again ======="
         fi
         mkswap /data/vendor/swap/swapfile
         swapon /data/vendor/swap/swapfile -p 32758
